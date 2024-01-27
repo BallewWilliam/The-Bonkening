@@ -26,7 +26,7 @@ func _physics_process(_delta):
 		move_and_slide()
 		
 
-# obtains input for movement and sets rotation state
+# obtains input for movement, sets rotation state, and sets sprite animation
 func get_input_and_rotate():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
@@ -47,7 +47,7 @@ func get_input_and_rotate():
 				can_change_rotation = true
 	
 	# changes the rotation of the player
-	if(input_direction > 0 && can_change_rotation && can_move):
+	if((input_direction.x > 0 || input_direction.y > 0) && can_change_rotation && can_move):
 		if(Input.get_action_strength("right") > 0):
 			curr_rotation_state = ROTATION_STATES.RIGHT
 			can_change_rotation = false

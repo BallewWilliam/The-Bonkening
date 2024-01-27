@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://blb357sea30tu"]
+[gd_scene load_steps=4 format=3 uid="uid://blb357sea30tu"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.gd" id="1_ccw55"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fuuep"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2qm8"]
 
 [node name="NoelleTest" type="Node2D"]
 
@@ -11,3 +13,6 @@ script = ExtResource("1_ccw55")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_fuuep")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_j2qm8")
