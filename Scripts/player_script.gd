@@ -12,22 +12,44 @@ enum ROTATION_STATES
 @export var speed = 250
 var can_move = true
 var can_change_rotation = true
+var attacking = false
 var curr_rotation_state = ROTATION_STATES.DOWN
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Hitboxes/RightHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$Hitboxes/LeftHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$Hitboxes/UpHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$Hitboxes/DownHitbox/CollisionShape2D.set_deferred("disabled", true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	if can_move == true:
-		get_input_and_rotate()
-		move_and_slide()
-		
+		get_input()
+		move_and_slide()		
+
+func _on_animated_sprite_2d_animation_finished():
+	if(attacking == true):
+		attacking = false
+		can_move = true
+		can_change_rotation = true
+		if(curr_rotation_state == ROTATION_STATES.RIGHT):
+			$AnimatedSprite2D.play("right_stand")
+			$Hitboxes/RightHitbox/CollisionShape2D.set_deferred("disabled", true)
+		elif(curr_rotation_state == ROTATION_STATES.LEFT):
+			$AnimatedSprite2D.play("left_stand")
+			$Hitboxes/LeftHitbox/CollisionShape2D.set_deferred("disabled", true)
+		elif(curr_rotation_state == ROTATION_STATES.UP):
+			$AnimatedSprite2D.play("up_stand")
+			$Hitboxes/UpHitbox/CollisionShape2D.set_deferred("disabled", true)
+		elif(curr_rotation_state == ROTATION_STATES.DOWN):
+			$AnimatedSprite2D.play("down_stand")
+			$Hitboxes/DownHitbox/CollisionShape2D.set_deferred("disabled", true)
+
 
 # obtains input for movement, sets rotation state, and sets sprite animation
-func get_input_and_rotate():
+func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	
@@ -74,6 +96,28 @@ func get_input_and_rotate():
 				$AnimatedSprite2D.play("up_stand")
 			ROTATION_STATES.DOWN:
 				$AnimatedSprite2D.play("down_stand")
-		
+	
+	# Handles attacking
+	if(Input.is_action_just_pressed("attack")):
+		can_move = false
+		can_change_rotation = false
+		attacking = true
+		if(curr_rotation_state == ROTATION_STATES.RIGHT):
+			$Hitboxes/RightHitbox/CollisionShape2D.set_deferred("disabled", false)
+			$AnimatedSprite2D.play("right_attack")			
+		elif(curr_rotation_state == ROTATION_STATES.LEFT):
+			$Hitboxes/LeftHitbox/CollisionShape2D.set_deferred("disabled", false)
+			$AnimatedSprite2D.play("left_attack")
+		elif(curr_rotation_state == ROTATION_STATES.UP):
+			$Hitboxes/UpHitbox/CollisionShape2D.set_deferred("disabled", false)
+			$AnimatedSprite2D.play("up_attack")			
+		elif(curr_rotation_state == ROTATION_STATES.DOWN):
+			$Hitboxes/DownHitbox/CollisionShape2D.set_deferred("disabled", false)
+			$AnimatedSprite2D.play("down_attack")
+			
 		
 	
+
+
+
+
