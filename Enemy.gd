@@ -5,14 +5,12 @@ extends CharacterBody2D
 var playerchase = false
 var player = null
 
+func _ready():
+	$AnimatedSprite2D.play("idle")
+
 func _physics_process(delta):
 	if(playerchase && player != null && !PlayerInfo.game_paused):
 		position += (player.position - position)/speed
-		if (player.position.x - position.x) > 0:
-			$AnimatedSprite2D.play("walk_right")
-		else:
-			$AnimatedSprite2D.play("walk_left")
-
 
 func _on_detection_area_body_entered(body):
 	player = body
@@ -41,4 +39,5 @@ func die():
 	$StopArea/CollisionShape2D.set_deferred("disabled", true)
 	$CooldownTimer.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
+	$AnimatedSprite2D.play("dead")
 		

@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnr0wxffveep1"]
+[gd_scene load_steps=2 format=3 uid="uid://cbcu2kt5twsey"]
 
-[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_qac1w"]
+[ext_resource type="Script" path="res://AreaScenes/read_me.gd" id="1_w0bne"]
 
-[node name="MainMenu" type="Control"]
+[node name="ReadMe" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qac1w")
+script = ExtResource("1_w0bne")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -20,20 +20,9 @@ offset_top = -124.0
 offset_right = 152.0
 grow_vertical = 0
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Start
-"
-
-[node name="Readme" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Read Me!
-"
-
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit
-"
+text = "Back"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -53,9 +42,12 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.992157, 0.658824, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.843137, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "Big Kitty Bonk DX"
+text = "Your mission is to sabotage a competing entertainment industry titan by bonking their most popular streamer
 
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Readme" to="." method="_on_readme_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+- Move with WASD or arrow keys
+- Pick up objects and talk with E or X
+- Attack with space or Z (you attack in the direction you last moved in)
+- Advance Dialogue with space or left mouse click
+- Quit with ESC"
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

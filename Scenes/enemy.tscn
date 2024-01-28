@@ -1,7 +1,28 @@
-[gd_scene load_steps=23 format=3 uid="uid://d1vkebpbp4lul"]
+[gd_scene load_steps=29 format=3 uid="uid://d1vkebpbp4lul"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_tlcf1"]
 [ext_resource type="Texture2D" uid="uid://jfn2ou5j4406" path="res://Assets/TestAssets/Walk.png" id="2_edfnc"]
+[ext_resource type="Texture2D" uid="uid://b15kk3vsv6bup" path="res://Assets/NPCs/Guard_Cat_Idle_Sprite_Sheet2.png" id="2_edmbw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yjot"]
+atlas = ExtResource("2_edmbw")
+region = Rect2(3276, 0, 819, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd1et"]
+atlas = ExtResource("2_edmbw")
+region = Rect2(0, 0, 819, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cck84"]
+atlas = ExtResource("2_edmbw")
+region = Rect2(819, 0, 819, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06ebd"]
+atlas = ExtResource("2_edmbw")
+region = Rect2(1638, 0, 819, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ii4t"]
+atlas = ExtResource("2_edmbw")
+region = Rect2(2457, 0, 819, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8uidk"]
 atlas = ExtResource("2_edfnc")
@@ -69,6 +90,31 @@ region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mqp6y"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yjot")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd1et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cck84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06ebd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ii4t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8uidk")
@@ -154,17 +200,22 @@ script = ExtResource("1_tlcf1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-0.8, -1)
+scale = Vector2(0.021, 0.021)
 sprite_frames = SubResource("SpriteFrames_mqp6y")
-animation = &"walk_left"
+animation = &"idle"
+frame_progress = 0.0878446
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+visible = false
 shape = SubResource("CircleShape2D_c615f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_jxe0d")
 
 [node name="StopArea" type="Area2D" parent="." groups=["enemy_hitbox"]]
@@ -173,6 +224,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StopArea"]
+visible = false
 shape = SubResource("CircleShape2D_bg1lx")
 
 [node name="CooldownTimer" type="Timer" parent="."]

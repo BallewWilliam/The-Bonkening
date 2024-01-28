@@ -19,7 +19,6 @@ Spice Rack: I'm going to tell or anything.
 
 : It's a bulletin board.
 : There's a poster showing a cat trying not to fall to their doom.
-: Seems a little morbid.
 
 => END
 
@@ -29,6 +28,8 @@ Dotty: All I do is make let's play videos, day-in and day-out, but my dream is t
 Dotty: It's a competitive industry though.
 
 => END
+
+~ security
 
 Cynthia: I don't know if giant hammers are allowed in here.
 Cynthia: You might run into trouble with security.
@@ -51,3 +52,37 @@ Chaz: Sorry, hammer lady.
 
 => END
 
+~ water
+
+: You don't know what this is.
+: Best not to touch it.
+
+=> END
+
+~ lock
+
+: You need a key
+
+=> END
+
+~ unlock
+
+: You unlocked it
+
+=> END
+
+~ key
+
+: You got a key
+
+=> END
+
+~ start
+
+: Your mission is to sabotage an this entertainment company by bonking their most popular streamer.
+: Move with WASD or arrow keys
+: Attack with space or Z (you attack in the direction you last moved)
+: Interact with E or X
+: Exit to menu with esc
+	
+=> END

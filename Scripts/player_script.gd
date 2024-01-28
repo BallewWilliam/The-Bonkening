@@ -21,6 +21,8 @@ func _unhandled_input(event):
 		if actionables.size() > 0:
 			actionables[0].action()
 			return
+	if(Input.is_action_just_pressed("quit")):
+		get_tree().change_scene_to_file("res://AreaScenes/main_menu.tscn")
 		
 
 # Called when the node enters the scene tree for the first time.
@@ -43,10 +45,10 @@ func _on_animated_sprite_2d_animation_finished():
 		can_move = true
 		can_change_rotation = true
 		if(curr_rotation_state == ROTATION_STATES.RIGHT):
-			$AnimatedSprite2D.play("right_stand")
+			$AnimatedSprite2D.play("down_stand")
 			$Hitboxes/RightHitbox/CollisionShape2D.set_deferred("disabled", true)
 		elif(curr_rotation_state == ROTATION_STATES.LEFT):
-			$AnimatedSprite2D.play("left_stand")
+			$AnimatedSprite2D.play("down_stand")
 			$Hitboxes/LeftHitbox/CollisionShape2D.set_deferred("disabled", true)
 		elif(curr_rotation_state == ROTATION_STATES.UP):
 			$AnimatedSprite2D.play("up_stand")
@@ -82,28 +84,28 @@ func get_input():
 	if((abs(input_direction.x) > 0 || abs(input_direction.y) > 0) && can_change_rotation):
 		if(Input.get_action_strength("right") > 0):
 			curr_rotation_state = ROTATION_STATES.RIGHT
-			$AnimatedSprite2D.play("right_walk")
+			$AnimatedSprite2D.play("down_stand")
 			can_change_rotation = false
 		elif(Input.get_action_strength("left") > 0):
 			curr_rotation_state = ROTATION_STATES.LEFT
-			$AnimatedSprite2D.play("left_walk")
+			$AnimatedSprite2D.play("down_stand")
 			can_change_rotation = false
 		elif(Input.get_action_strength("up") > 0):
 			curr_rotation_state = ROTATION_STATES.UP
-			$AnimatedSprite2D.play("up_walk")
+			$AnimatedSprite2D.play("up_stand")
 			can_change_rotation = false
 		elif(Input.get_action_strength("down") > 0):
 			curr_rotation_state = ROTATION_STATES.DOWN
-			$AnimatedSprite2D.play("down_walk")
+			$AnimatedSprite2D.play("down_stand")
 			can_change_rotation = false
 	elif(input_direction.x == 0 && input_direction.y == 0):
 		match curr_rotation_state:
 			ROTATION_STATES.RIGHT:
-				$AnimatedSprite2D.play("right_stand")
+				$AnimatedSprite2D.play("down_stand")
 			ROTATION_STATES.LEFT:
-				$AnimatedSprite2D.play("left_stand")
+				$AnimatedSprite2D.play("down_stand")
 			ROTATION_STATES.UP:
-				$AnimatedSprite2D.play("up_stand")
+				$AnimatedSprite2D.play("down_stand")
 			ROTATION_STATES.DOWN:
 				$AnimatedSprite2D.play("down_stand")
 	
