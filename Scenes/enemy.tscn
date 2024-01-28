@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d1vkebpbp4lul"]
+[gd_scene load_steps=23 format=3 uid="uid://d1vkebpbp4lul"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_tlcf1"]
 [ext_resource type="Texture2D" uid="uid://jfn2ou5j4406" path="res://Assets/TestAssets/Walk.png" id="2_edfnc"]
@@ -145,6 +145,9 @@ radius = 46.8722
 radius = 6.0
 height = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bg1lx"]
+radius = 11.8
+
 [node name="Enemy" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_tlcf1")
@@ -165,5 +168,14 @@ shape = SubResource("CircleShape2D_c615f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jxe0d")
 
+[node name="StopArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopArea"]
+shape = SubResource("CircleShape2D_bg1lx")
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="StopArea" to="." method="_on_stop_area_body_entered"]
+[connection signal="body_exited" from="StopArea" to="." method="_on_stop_area_body_exited"]

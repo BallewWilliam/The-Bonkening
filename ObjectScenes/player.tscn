@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c8wtblnin2ty2"]
+[gd_scene load_steps=35 format=3 uid="uid://goorf2d6g2qs"]
 
 [ext_resource type="Script" path="res://Scripts/player_script.gd" id="1_itjhn"]
 [ext_resource type="Texture2D" uid="uid://bmlwe7ttaiiuf" path="res://Assets/TestAssets/Attack.png" id="2_q2rj5"]
@@ -252,6 +252,7 @@ size = Vector2(12.7875, 20.8)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(5, 5)
+collision_layer = 3
 script = ExtResource("1_itjhn")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -273,7 +274,6 @@ position = Vector2(0.2, -13.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpHitbox"]
 position = Vector2(-0.3, -0.100001)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ao1qs")
 
 [node name="DownHitbox" type="Area2D" parent="Hitboxes" groups=["PlayerHitbox"]]
@@ -281,7 +281,6 @@ position = Vector2(0.4, 12.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/DownHitbox"]
 position = Vector2(-0.3, -0.100001)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_s10hq")
 
 [node name="RightHitbox" type="Area2D" parent="Hitboxes" groups=["PlayerHitbox"]]
@@ -289,7 +288,6 @@ position = Vector2(14.6, -1.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/RightHitbox"]
 position = Vector2(0.00624943, 0.6)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_n28tj")
 
 [node name="LeftHitbox" type="Area2D" parent="Hitboxes" groups=["PlayerHitbox"]]
@@ -297,7 +295,6 @@ position = Vector2(-14, -0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/LeftHitbox"]
 position = Vector2(0.00624943, 0.6)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_louxq")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
