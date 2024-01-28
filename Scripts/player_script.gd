@@ -15,9 +15,17 @@ var can_change_rotation = true
 var attacking = false
 var curr_rotation_state = ROTATION_STATES.DOWN
 
+func _unhandled_input(event):
+	if(Input.is_action_just_pressed("interact")):
+		var actionables = $Hurtbox.get_overlapping_areas()
+		if actionables.size() > 0:
+			actionables[0].action()
+			return
+		
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DialogueManager.dialogue_ended.connect(_on_dialogue_end)
 	$Hitboxes/RightHitbox/CollisionShape2D.set_deferred("disabled", true)
 	$Hitboxes/LeftHitbox/CollisionShape2D.set_deferred("disabled", true)
 	$Hitboxes/UpHitbox/CollisionShape2D.set_deferred("disabled", true)
@@ -25,7 +33,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	if can_move == true:
+	if(can_move == true && !PlayerInfo.game_paused):
 		get_input()
 		move_and_slide()		
 
@@ -47,6 +55,8 @@ func _on_animated_sprite_2d_animation_finished():
 			$AnimatedSprite2D.play("down_stand")
 			$Hitboxes/DownHitbox/CollisionShape2D.set_deferred("disabled", true)
 
+func _on_dialogue_end(dialogue):
+	PlayerInfo.game_paused = false
 
 # obtains input for movement, sets rotation state, and sets sprite animation
 func get_input():
@@ -115,8 +125,17 @@ func get_input():
 			$Hitboxes/DownHitbox/CollisionShape2D.set_deferred("disabled", false)
 			$AnimatedSprite2D.play("down_attack")
 			
+	
+func _on_hurtbox_area_entered(area):
+	if(area.is_in_group("enemy_hitbox")):
+		PlayerInfo.player_health -= 1
+		if(PlayerInfo.player_health == 0):
+			PlayerInfo.player_health = 3
+			get_tree().call_deferred("reload_current_scene")
 		
 	
+
+
 
 
 

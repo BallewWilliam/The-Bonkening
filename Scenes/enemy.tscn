@@ -148,10 +148,9 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bg1lx"]
 radius = 11.8
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(5, 5)
 script = ExtResource("1_tlcf1")
-speed = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -168,14 +167,19 @@ shape = SubResource("CircleShape2D_c615f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jxe0d")
 
-[node name="StopArea" type="Area2D" parent="."]
+[node name="StopArea" type="Area2D" parent="." groups=["enemy_hitbox"]]
+scale = Vector2(0.604355, 0.925525)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StopArea"]
 shape = SubResource("CircleShape2D_bg1lx")
 
+[node name="CooldownTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="StopArea" to="." method="_on_stop_area_area_entered"]
 [connection signal="body_entered" from="StopArea" to="." method="_on_stop_area_body_entered"]
 [connection signal="body_exited" from="StopArea" to="." method="_on_stop_area_body_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
