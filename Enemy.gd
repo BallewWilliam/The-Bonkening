@@ -22,3 +22,11 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	player = null
 	playerchase = false
+
+
+func _on_stop_area_body_entered(body):
+	playerchase = false
+
+
+func _on_stop_area_body_exited(body):
+	playerchase = true
